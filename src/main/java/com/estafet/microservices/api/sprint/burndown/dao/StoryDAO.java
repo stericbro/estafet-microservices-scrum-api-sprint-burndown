@@ -22,12 +22,12 @@ public class StoryDAO {
 			story = sprint.add(story);
 			entityManager.merge(sprint);
 		} else {
-			entityManager.persist(story);	
+			entityManager.persist(story);
 		}
 		return story;
 	}
-	
-	
+
+
 	@Transactional
 	public Story update(Story story) {
 		if (story.getSprintId() != null) {

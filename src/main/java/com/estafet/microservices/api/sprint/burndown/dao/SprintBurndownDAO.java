@@ -18,12 +18,12 @@ public class SprintBurndownDAO {
 	public Sprint getSprintBurndown(int sprintId) {
 		return entityManager.find(Sprint.class, new Integer(sprintId));
 	}
-	
+
 	@Transactional
 	public void create(Sprint sprint) {
 		entityManager.persist(sprint);
 	}
-	
+
 	@Transactional
 	public void update(Sprint sprint) {
 		entityManager.merge(sprint.recalculate());

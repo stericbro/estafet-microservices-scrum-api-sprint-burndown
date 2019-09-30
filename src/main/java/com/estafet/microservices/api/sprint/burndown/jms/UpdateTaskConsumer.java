@@ -13,12 +13,12 @@ import io.opentracing.Tracer;
 
 @Component
 public class UpdateTaskConsumer {
-	
+
 	public final static String TOPIC = "update.task.topic";
-	
+
 	@Autowired
 	private Tracer tracer;
-	
+
 	@Autowired
 	private SprintService sprintService;
 
@@ -33,10 +33,10 @@ public class UpdateTaskConsumer {
 			}
 		} finally {
 			if (tracer.activeSpan() != null) {
-				tracer.activeSpan().close();	
+				tracer.activeSpan().close();
 			}
 		}
 	}
-	
-	
+
+
 }

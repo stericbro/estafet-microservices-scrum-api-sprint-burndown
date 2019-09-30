@@ -139,7 +139,7 @@ public class SprintDay {
 			this.hoursTotal = 0;
 			for (TaskUpdate update : updates) {
 				hoursTotal += update.getRemainingHours();
-			}	
+			}
 		}
 	}
 

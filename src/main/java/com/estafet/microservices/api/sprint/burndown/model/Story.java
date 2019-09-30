@@ -55,7 +55,7 @@ public class Story {
 		updated.setRemainingUpdated(task.getRemainingUpdated());
 		return updated;
 	}
-	
+
 	private Task getTask(Integer taskId) {
 		for (Task task : tasks) {
 			if (task.getId().equals(taskId)) {

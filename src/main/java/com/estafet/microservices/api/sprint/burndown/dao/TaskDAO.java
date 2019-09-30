@@ -20,11 +20,11 @@ public class TaskDAO {
 		Story story = entityManager.find(Story.class, task.getStoryId());
 		if (story != null) {
 			task = story.add(task);
-			entityManager.merge(story);	
+			entityManager.merge(story);
 		} else {
-			
+
 		}
-		
+
 		return task;
 	}
 

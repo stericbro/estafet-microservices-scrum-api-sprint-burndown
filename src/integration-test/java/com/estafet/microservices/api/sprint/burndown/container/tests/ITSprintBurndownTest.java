@@ -50,7 +50,7 @@ public class ITSprintBurndownTest {
 			.body("sprintDays.hoursTotal", hasItems(50, 38, 20, 15, 3))
 			.body("sprintDays.sprintDay", hasItems("2016-10-01 00:00:00", "2016-10-02 00:00:00", "2016-10-03 00:00:00", "2016-10-04 00:00:00", "2016-10-05 00:00:00"));
 	}
-	
+
 	@Test
 	@DatabaseSetup("ITSprintBurndownTest-data.xml")
 	public void testNewSprintConsumer() {
@@ -63,16 +63,16 @@ public class ITSprintBurndownTest {
 				"    \"projectId\": 1,\r\n" +
 				"    \"noDays\": 5\r\n" +
 				"}");
-		
+
 		get("/sprint/2000/burndown").then()
 			.statusCode(HttpURLConnection.HTTP_OK)
 			.body("id", is(2000))
 			.body("number", is(2))
 			.body("sprintDays.dayNo", hasItems(1, 2, 3, 4, 5))
 			.body("sprintDays.hoursTotal", hasItems(0, 0, 0, 0, 0))
-			.body("sprintDays.sprintDay", hasItems(null, "2016-10-03 00:00:00", "2016-10-04 00:00:00", "2016-10-05 00:00:00", "2016-10-06 00:00:00", "2016-10-07 00:00:00"));		
+			.body("sprintDays.sprintDay", hasItems(null, "2016-10-03 00:00:00", "2016-10-04 00:00:00", "2016-10-05 00:00:00", "2016-10-06 00:00:00", "2016-10-07 00:00:00"));
 	}
-	
+
 	@Test
 	@DatabaseSetup("ITSprintBurndownTest-data.xml")
 	public void testNewTaskConsumer() {
@@ -85,7 +85,7 @@ public class ITSprintBurndownTest {
 				"    \"projectId\": 1,\r\n" +
 				"    \"noDays\": 5\r\n" +
 				"}");
-		
+
 		NewStoryTopicProducer.send("{\r\n" +
 				"    \"id\": 1,\r\n" +
 				"    \"title\": \"some test story\",\r\n" +
@@ -95,7 +95,7 @@ public class ITSprintBurndownTest {
 				"    \"projectId\": 1,\r\n" +
 				"    \"status\": \"Not Started\"\r\n" +
 				"}");
-		
+
 		NewTaskTopicProducer.send("{\r\n" +
 				"    \"id\": 1,\r\n" +
 				"    \"title\": \"this is a task\",\r\n" +
@@ -106,7 +106,7 @@ public class ITSprintBurndownTest {
 				"    \"remainingUpdated\": \"2016-10-01 00:00:00\",\r\n" +
 				"    \"storyId\": 1\r\n" +
 				"}");
-		
+
 		NewTaskTopicProducer.send("{\r\n" +
 				"    \"id\": 2,\r\n" +
 				"    \"title\": \"this is a task\",\r\n" +
@@ -117,7 +117,7 @@ public class ITSprintBurndownTest {
 				"    \"remainingUpdated\": \"2016-10-01 00:00:00\",\r\n" +
 				"    \"storyId\": 1\r\n" +
 				"}");
-		
+
 		NewTaskTopicProducer.send("{\r\n" +
 				"    \"id\": 3,\r\n" +
 				"    \"title\": \"this is a task\",\r\n" +
@@ -128,13 +128,13 @@ public class ITSprintBurndownTest {
 				"    \"remainingUpdated\": \"2016-10-01 00:00:00\",\r\n" +
 				"    \"storyId\": 1\r\n" +
 				"}");
-		
+
 		get("/sprint/2000/burndown").then()
 			.statusCode(HttpURLConnection.HTTP_OK)
 			.body("id", is(2000))
 			.body("number", is(2))
 			.body("sprintDays.dayNo", hasItems(1, 2, 3, 4, 5));
-		
+
 	}
 
 }

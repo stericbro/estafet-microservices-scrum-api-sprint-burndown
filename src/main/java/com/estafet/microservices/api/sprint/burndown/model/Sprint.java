@@ -35,24 +35,24 @@ public class Sprint {
 
 	@Column(name = "NO_DAYS", nullable = false)
 	private Integer noDays;
-	
+
 	@Column(name = "INITIAL_TOTAL_HOURS", nullable = false)
 	private int initialTotalHours = 0;
-	
+
 	@OrderBy("dayNo ASC")
 	@OneToMany(mappedBy = "sprintDaySprint", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<SprintDay> sprintDays = new ArrayList<SprintDay>();
-	
+
 	@OneToMany(mappedBy = "storySprint", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Story> stories = new HashSet<Story>();
-		
+
 	public Sprint init() {
 		initialTotalHours = getTotalTaskHours();
 		SprintDay day = new SprintDay();
 		day.setId(0);
 		day.setDayNo(0);
 		day.setHoursTotal(initialTotalHours);
-		sprintDays.add(0, day);		
+		sprintDays.add(0, day);
 		for (int i=0; i < sprintDays.size(); i++) {
 			float coefficient = (float)i / (sprintDays.size()-1);
 			float ideal = initialTotalHours - (coefficient * initialTotalHours);
@@ -96,7 +96,7 @@ public class Sprint {
 		}
 		return this;
 	}
-	
+
 	public Sprint update(Task task) {
 		if (task.getRemainingUpdated() == null) {
 			initialTotalHours = getTotalTaskHours();
@@ -112,13 +112,13 @@ public class Sprint {
 		Story updated = getStory(story.getId());
 		if (updated == null) {
 			story.setStorySprint(this);
-			stories.add(story);	
+			stories.add(story);
 			updated = story;
 		}
 		updated.setStatus(story.getStatus());
 		return updated;
 	}
-	
+
 	private Story getStory(Integer storyId) {
 		for (Story story : stories) {
 			if (story.getId().equals(storyId)) {
@@ -126,24 +126,24 @@ public class Sprint {
 			}
 		}
 		return null;
-	}	
-	
+	}
+
 	private int getTotalTaskHours() {
 		int hours = 0;
 		for (Story story : stories) {
 			for (Task task : story.getTasks()) {
 				hours += task.getInitialHours();
-			}	
+			}
 		}
 		return hours;
 	}
-	
+
 	private void backfill(int dayNo, Task task) {
 		for (int i = 0; sprintDays.get(i).getDayNo() < dayNo; i++) {
 			sprintDays.get(i).backfill(task);
 		}
 	}
-	
+
 	public Sprint recalculate() {
 		for (SprintDay sprintDay : sprintDays) {
 			sprintDay.recalculate();
@@ -159,7 +159,7 @@ public class Sprint {
 		}
 		throw new RuntimeException("Invalid day - " + day);
 	}
-	
+
 	public static Sprint fromJSON(String message) {
 		try {
 			return new ObjectMapper().readValue(message, Sprint.class);
@@ -177,5 +177,5 @@ public class Sprint {
 		sprint.startDate = "2017-10-16 00:00:00";
 		return sprint;
 	}
-	
+
 }

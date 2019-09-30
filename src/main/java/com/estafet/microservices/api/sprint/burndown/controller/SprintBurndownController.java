@@ -13,15 +13,15 @@ public class SprintBurndownController {
 
 	@Autowired
 	private SprintService sprintService;
-	
+
 	@GetMapping("/api")
 	public Sprint getAPI() {
 		return Sprint.getAPI();
 	}
-	
+
 	@GetMapping("/sprint/{id}/burndown")
 	public Sprint getSprintBurndown(@PathVariable int id) {
 		return sprintService.getSprintBurndown(id);
 	}
-	
+
 }
