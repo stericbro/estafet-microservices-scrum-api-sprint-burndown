@@ -19,105 +19,105 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Task {
 
-	@Id
-	@Column(name = "TASK_ID")
-	private Integer id;
+    @Id
+    @Column(name = "TASK_ID")
+    private Integer id;
 
-	@Column(name = "INITIAL_HOURS", nullable = false)
-	private Integer initialHours;
+    @Column(name = "INITIAL_HOURS", nullable = false)
+    private Integer initialHours;
 
-	@Column(name = "REMAINING_HOURS", nullable = false)
-	private Integer remainingHours;
+    @Column(name = "REMAINING_HOURS", nullable = false)
+    private Integer remainingHours;
 
-	@Column(name = "REMAINING_UPDATED")
-	private String remainingUpdated;
+    @Column(name = "REMAINING_UPDATED")
+    private String remainingUpdated;
 
-	@Transient
-	private Integer storyId;
+    @Transient
+    private Integer storyId;
 
-	@ManyToOne
-	@JoinColumn(name = "STORY_ID", nullable = false, referencedColumnName = "STORY_ID", foreignKey = @ForeignKey(name = "TASK_TO_STORY_FK"))
-	private Story taskStory;
+    @ManyToOne
+    @JoinColumn(name = "STORY_ID", nullable = false, referencedColumnName = "STORY_ID", foreignKey = @ForeignKey(name = "TASK_TO_STORY_FK"))
+    private Story taskStory;
 
-	public Integer getStoryId() {
-		return storyId;
-	}
+    public Integer getStoryId() {
+        return storyId;
+    }
 
-	public Story getTaskStory() {
-		return taskStory;
-	}
+    public Story getTaskStory() {
+        return taskStory;
+    }
 
-	public void setTaskStory(Story taskStory) {
-		this.taskStory = taskStory;
-	}
+    public void setTaskStory(Story taskStory) {
+        this.taskStory = taskStory;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Integer getInitialHours() {
-		return initialHours;
-	}
+    public Integer getInitialHours() {
+        return initialHours;
+    }
 
-	public Integer getRemainingHours() {
-		return remainingHours;
-	}
+    public Integer getRemainingHours() {
+        return remainingHours;
+    }
 
-	public String getRemainingUpdated() {
-		return remainingUpdated;
-	}
+    public String getRemainingUpdated() {
+        return remainingUpdated;
+    }
 
-	Task setId(Integer id) {
-		this.id = id;
-		return this;
-	}
+    Task setId(Integer id) {
+        this.id = id;
+        return this;
+    }
 
-	Task setInitialHours(Integer initialHours) {
-		this.initialHours = initialHours;
-		return this;
-	}
+    Task setInitialHours(Integer initialHours) {
+        this.initialHours = initialHours;
+        return this;
+    }
 
-	Task setRemainingHours(Integer remainingHours) {
-		this.remainingHours = remainingHours;
-		return this;
-	}
+    Task setRemainingHours(Integer remainingHours) {
+        this.remainingHours = remainingHours;
+        return this;
+    }
 
-	Task setRemainingUpdated(String remainingUpdated) {
-		this.remainingUpdated = remainingUpdated;
-		return this;
-	}
+    Task setRemainingUpdated(String remainingUpdated) {
+        this.remainingUpdated = remainingUpdated;
+        return this;
+    }
 
-	public static Task fromJSON(String message) {
-		try {
-			return new ObjectMapper().readValue(message, Task.class);
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    public static Task fromJSON(String message) {
+        try {
+            return new ObjectMapper().readValue(message, Task.class);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Task other = (Task) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Task other = (Task) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
 
 }

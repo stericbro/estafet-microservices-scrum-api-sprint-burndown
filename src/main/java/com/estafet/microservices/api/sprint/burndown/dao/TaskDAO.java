@@ -12,20 +12,20 @@ import com.estafet.microservices.api.sprint.burndown.model.Task;
 @Repository
 public class TaskDAO {
 
-	@PersistenceContext
-	private EntityManager entityManager;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-	@Transactional
-	public Task update(Task task) {
-		Story story = entityManager.find(Story.class, task.getStoryId());
-		if (story != null) {
-			task = story.add(task);
-			entityManager.merge(story);
-		} else {
+    @Transactional
+    public Task update(Task task) {
+        Story story = entityManager.find(Story.class, task.getStoryId());
+        if (story != null) {
+            task = story.add(task);
+            entityManager.merge(story);
+        } else {
 
-		}
+        }
 
-		return task;
-	}
+        return task;
+    }
 
 }

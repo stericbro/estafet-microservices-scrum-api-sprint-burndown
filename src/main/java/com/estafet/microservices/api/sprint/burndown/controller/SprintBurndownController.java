@@ -11,17 +11,17 @@ import com.estafet.microservices.api.sprint.burndown.services.SprintService;
 @RestController
 public class SprintBurndownController {
 
-	@Autowired
-	private SprintService sprintService;
+    @Autowired
+    private SprintService sprintService;
 
-	@GetMapping("/api")
-	public Sprint getAPI() {
-		return Sprint.getAPI();
-	}
+    @GetMapping("/api")
+    public Sprint getAPI() {
+        return Sprint.getAPI();
+    }
 
-	@GetMapping("/sprint/{id}/burndown")
-	public Sprint getSprintBurndown(@PathVariable int id) {
-		return sprintService.getSprintBurndown(id);
-	}
+    @GetMapping("/sprint/{id}/burndown")
+    public Sprint getSprintBurndown(@PathVariable int id) {
+        return sprintService.getSprintBurndown(id);
+    }
 
 }
